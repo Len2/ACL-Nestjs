@@ -66,14 +66,6 @@ export class AuthService {
       .createQueryBuilder('user')
       .addSelect('user.password')
       .leftJoinAndSelect('user.role', 'role')
-      .leftJoinAndSelect('user.following', 'following')
-      .leftJoinAndSelect('user.promoters', 'promoters')
-      // .leftJoinAndMapOne(
-      //   'user.business',
-      //   BusinessEmployee,
-      //   'business_employee',
-      //   'user.id = business_employee.user_id',
-      // )
       .where('user.email =:email', { email: data.email })
       .getOne();
 
@@ -115,12 +107,6 @@ export class AuthService {
       .createQueryBuilder('user')
       .addSelect('user.password')
       .leftJoinAndSelect('user.role', 'role')
-      // .leftJoinAndMapOne(
-      //   'user.business',
-      //   BusinessEmployee,
-      //   'business_employee',
-      //   'user.id = business_employee.user_id',
-      // )
       .where('user.email =:email', { email: data.email })
       .getOne();
 

@@ -24,6 +24,7 @@ export class RolesGuard extends AuthGuard implements CanActivate {
     }
 
     const role = await user.role;
+    // console.log(request);
 
     return role && roles.includes(role.slug);
   }

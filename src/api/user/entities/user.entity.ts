@@ -65,21 +65,6 @@ export class User extends BaseEntity {
   })
   phone: string;
 
-  @Column({
-    nullable: true,
-  })
-  facebook_id: string;
-
-  @Column({
-    nullable: true,
-  })
-  google_id: string;
-
-  @Column({
-    nullable: true,
-  })
-  stripe_customer_id: string;
-
   @CreateDateColumn()
   created_at: Date;
 

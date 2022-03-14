@@ -24,18 +24,18 @@ async function bootstrap() {
     swaggerOptions: { docExpansion: 'none' },
   });
 
-  app.enableCors();
-  app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header(
-      'Access-Control-Allow-Headers',
-      'Content-Type, Accept, Content-Length',
-    );
-    res.header('Access-Control-Expose-Headers', 'Content-Length');
-    contextService.set('request', req);
-    next();
-  });
+  // app.enableCors();
+  // app.use((req, res, next) => {
+  //   res.header('Access-Control-Allow-Origin', '*');
+  //   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  //   res.header(
+  //     'Access-Control-Allow-Headers',
+  //     'Content-Type, Accept, Content-Length',
+  //   );
+  //   res.header('Access-Control-Expose-Headers', 'Content-Length');
+  //   contextService.set('request', req);
+  //   next();
+  // });
 
   const port = process.env.PORT || 3014;
   await app.listen(port, () => {

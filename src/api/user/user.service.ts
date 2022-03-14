@@ -59,10 +59,7 @@ export class UserService {
   }
 
   async findAll(options, query): Promise<any> {
-    const queryBuilder = this.userRepository
-      .createQueryBuilder('user')
-      .leftJoinAndSelect('files.media', 'media');
-
+    const queryBuilder = this.userRepository.createQueryBuilder('user');
     if (query.search) {
       queryBuilder.where(
         'first_name iLIKE :search OR last_name iLIKE :search OR email iLIKE :search',
