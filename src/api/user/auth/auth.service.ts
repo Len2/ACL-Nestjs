@@ -102,42 +102,6 @@ export class AuthService {
     return { ...user, token: token.access_token };
   }
 
-  public async cultureAdminLogin(data: LoginUserDto) {
-    const user: any = await this.userRepository
-      .createQueryBuilder('user')
-      .addSelect('user.password')
-      .leftJoinAndSelect('user.role', 'role')
-      .where('user.email =:email', { email: data.email })
-      .getOne();
-
-    if (
-      !user ||
-      !(await this.hashService.compare(data.password, user.password))
-    ) {
-      throw new HttpException(
-        'Invalid credentials',
-        HttpStatus.UNPROCESSABLE_ENTITY,
-      );
-    }
-
-    if (user.role.slug !== 'culture-admin') {
-      throw new HttpException(
-        'This account has no access here!',
-        HttpStatus.UNPROCESSABLE_ENTITY,
-      );
-    }
-
-    const token = await this.authService.sign(
-      {
-        id: user.id,
-        email: user.email,
-      },
-      {},
-    );
-
-    return { ...user, token: token.access_token };
-  }
-
   public async getUserByEmail(email: string) {
     const user = await this.userRepository.findOne({ where: { email } });
 

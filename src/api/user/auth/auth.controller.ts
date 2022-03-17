@@ -54,16 +54,6 @@ export class AuthController {
     });
   }
 
-  @Post('/admin-login')
-  async adminLogin(@Body() auth: LoginUserDto, @Res() res): Promise<any> {
-    const user = await this.authService.cultureAdminLogin(auth);
-
-    return res.json({
-      success: 'You have successfully logged in!',
-      user,
-    });
-  }
-
   @Post('/set-password/:token')
   async setPassword(
     @Param('token') token: string,
