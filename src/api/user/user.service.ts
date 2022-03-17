@@ -87,9 +87,6 @@ export class UserService {
     return await this.userRepository
       .createQueryBuilder('user')
       .leftJoinAndSelect('user.role', 'role')
-      .leftJoinAndSelect('user.preferences', 'preferences')
-      .leftJoinAndSelect('user.following', 'following')
-      .leftJoinAndSelect('files.media', 'media')
       .where('user.id =:id', { id })
       .getOne();
   }
@@ -141,10 +138,6 @@ export class UserService {
     const profile: any = await this.userRepository
       .createQueryBuilder('user')
       .leftJoinAndSelect('user.role', 'role')
-      .leftJoinAndSelect('user.preferences', 'preferences')
-      .leftJoinAndSelect('user.following', 'following')
-      .leftJoinAndSelect('user.promoters', 'promoters')
-      .leftJoinAndSelect('files.media', 'media')
       .where('user.id =:id', { id: user.id })
       .getOne();
 
@@ -168,8 +161,6 @@ export class UserService {
     return await this.userRepository
       .createQueryBuilder('user')
       .leftJoinAndSelect('user.role', 'role')
-      .leftJoinAndSelect('user.preferences', 'preferences')
-      .leftJoinAndSelect('files.media', 'media')
       .where('user.id =:id', { id: user.id })
       .getOne();
   }

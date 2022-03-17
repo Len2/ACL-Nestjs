@@ -167,10 +167,7 @@ export class IsUniqueConstraint implements ValidatorConstraintInterface {
     const entity = args.constraints[0];
     const except = args.constraints[2] || {};
     let table = args.constraints[1];
-    let column =
-      request.body && request.body.lang != 'se'
-        ? args.property
-        : args.property + '_se';
+    let column = args.property;
     const relatedValues = args.object as any;
     let ignoreValue = '';
 

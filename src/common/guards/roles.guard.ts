@@ -19,6 +19,8 @@ export class RolesGuard extends AuthGuard implements CanActivate {
 
     const user = request.user;
 
+    // console.log(user);
+
     if (!user) {
       return false;
     }

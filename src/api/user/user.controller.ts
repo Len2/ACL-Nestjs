@@ -44,6 +44,7 @@ export class UserController {
   @Post()
   @Roles('culture-admin')
   async create(@Body() data: CreateUserDto, @Res() res) {
+    console.log({data});
     const user = await this.userService.create(data);
 
     this.emitter.emit('registerUserByCultureAdmin', user);
