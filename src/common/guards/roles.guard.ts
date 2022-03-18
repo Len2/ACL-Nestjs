@@ -19,14 +19,12 @@ export class RolesGuard extends AuthGuard implements CanActivate {
 
     const user = request.user;
 
-    // console.log(user);
-
     if (!user) {
       return false;
     }
 
     const role = await user.role;
-    // console.log(request);
+    if (role.slug == 'super-admin') return true;
 
     return role && roles.includes(role.slug);
   }
