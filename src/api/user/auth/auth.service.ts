@@ -42,13 +42,10 @@ export class AuthService {
       phone: data.phone_number,
       password: data.password,
       role_id: guestRole.id,
-      // location_id: location.id,
     });
     const savedUser = await this.userRepository.save(guest);
 
-    const user = await this.userRepository.findOne(savedUser.id, {
-      relations: ['preferences'],
-    });
+    const user = await this.userRepository.findOne(savedUser.id);
 
     const token = await this.authService.sign(
       {

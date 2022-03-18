@@ -49,14 +49,14 @@ export class PermissionController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number) {
+  async findOne(@Param('id') id: string) {
     return (await this.permissionService.findOne(id)).toResponseObject();
   }
 
   @Put(':id')
   @Roles('culture-admin')
   async update(
-    @Param('id') id: number,
+    @Param('id') id: string,
     @Body() data: UpdatePermissionDto,
     @Res() res,
   ) {
@@ -69,7 +69,7 @@ export class PermissionController {
 
   @Delete(':id')
   @Roles('culture-admin')
-  async remove(@Param('id') id: number, @Res() res) {
+  async remove(@Param('id') id: string, @Res() res) {
     const permission = await this.permissionService.remove(id);
     return res.json({
       success: 'Permission was deleted successfully!',

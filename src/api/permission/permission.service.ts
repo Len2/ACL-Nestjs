@@ -45,11 +45,11 @@ export class PermissionService {
     return await queryBuilder.getManyAndCount();
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     return await this.getRequestedPermissionOrFail(id);
   }
 
-  async update(id: number, data: UpdatePermissionDto) {
+  async update(id: string, data: UpdatePermissionDto) {
     await this.getRequestedPermissionOrFail(id);
     await this.permissionRepository.update(id, {
       name: data.name,
@@ -61,7 +61,7 @@ export class PermissionService {
     });
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     const permission = await this.getRequestedPermissionOrFail(id);
     await this.permissionRepository.remove(permission);
 

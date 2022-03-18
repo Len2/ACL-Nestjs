@@ -118,9 +118,6 @@ export class UpdateUserProfileDto {
 
   @ApiPropertyOptional()
   description: string;
-
-  @ApiPropertyOptional()
-  media_id: string;
 }
 
 export class UserRO {
