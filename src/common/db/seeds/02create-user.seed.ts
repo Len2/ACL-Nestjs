@@ -12,6 +12,13 @@ export default class CreateUsers implements Seeder {
       .where('role.slug = :slug', { slug: 'culture-admin' })
       .getOne();
 
+    const superAdminRole = await connection
+      .createQueryBuilder()
+      .select('role')
+      .from(Role, 'role')
+      .where('role.slug = :slug', { slug: 'super-admin' })
+      .getOne();
+
     const businessAdmin = await connection
       .createQueryBuilder()
       .select('role')
@@ -65,6 +72,13 @@ export default class CreateUsers implements Seeder {
           email: 'businessAdmin@kutia.net',
           password: await bcrypt.hash('12345678', 10),
           role_id: businessAdmin.id,
+        },
+        {
+          first_name: 'Super Admin',
+          last_name: 'Super',
+          email: 'superadmin@kutia.net',
+          password: await bcrypt.hash('12345678', 10),
+          role_id: superAdminRole.id,
         },
       ])
       .execute();

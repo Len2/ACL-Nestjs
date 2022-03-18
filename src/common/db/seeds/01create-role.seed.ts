@@ -15,6 +15,7 @@ export default class CreateRoles implements Seeder {
         { name: 'business sub admin', slug: 'business-sub-admin' },
         { name: 'business admin', slug: 'business-admin' },
         { name: 'culture admin', slug: 'culture-admin' },
+        { name: 'super admin', slug: 'super-admin' },
       ])
       .execute();
   }
