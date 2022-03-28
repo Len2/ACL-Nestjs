@@ -27,9 +27,11 @@ import { RolesGuard } from '../../common/guards/roles.guard';
 import { InjectEventEmitter } from 'nest-emitter';
 import { EventEmitter } from 'stream';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { PaginationInterceptor } from '../../common/interceptors/pagination.interceptor';
 
-@UseGuards(new AuthGuard())
+import { Permissions } from '../../common/decorators/permissions.decorator';
+import { PermissionsGuard } from '../../common/guards/permission.guard';
+
+@UseGuards(new AuthGuard(), PermissionsGuard)
 @UseGuards(new RolesGuard())
 @UsePipes(new ValidationPipe())
 @ApiBearerAuth()
@@ -44,7 +46,7 @@ export class UserController {
   @Post()
   @Roles('culture-admin')
   async create(@Body() data: CreateUserDto, @Res() res) {
-    console.log({data});
+    console.log({ data });
     const user = await this.userService.create(data);
 
     this.emitter.emit('registerUserByCultureAdmin', user);
@@ -55,9 +57,10 @@ export class UserController {
     });
   }
 
-  @UseInterceptors(PaginationInterceptor)
+  // @UseInterceptors(PaginationInterceptor)
   @Get()
-  @Roles('culture-admin')
+  // @Roles('culture-admin')
+  @Permissions('delete_user')
   async findAll(@PaginationOptions() options, @Query() query) {
     return await this.userService.findAll(options, query);
   }

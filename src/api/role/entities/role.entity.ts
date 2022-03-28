@@ -5,6 +5,8 @@ import {
   OneToMany,
   ManyToMany,
   JoinTable,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import { RoleRO } from '../dto/role.dto';
 import { User } from '../../../api/user/entities/user.entity';
@@ -30,6 +32,12 @@ export class Role {
   @ManyToMany((type) => Permission, { onDelete: 'CASCADE' })
   @JoinTable({ name: 'role_permissions' })
   permissions: Permission[];
+
+  @ManyToOne(() => Permission, (permission) => permission.id, {
+    onDelete: 'CASCADE',
+  })
+  @JoinTable({ name: 'role_permissions' })
+  permission: Permission;
 
   isAdmin() {
     return this.slug == 'culture-admin';

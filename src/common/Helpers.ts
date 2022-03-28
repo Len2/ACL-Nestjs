@@ -55,6 +55,7 @@ export async function getUserFromToken(token) {
     .select('user')
     .from(User, 'user')
     .leftJoinAndSelect('user.role', 'role')
+    .leftJoinAndSelect('role.permissions', 'permissions')
     .where('user.id = :id', { id: user.id })
     .getOne();
 
